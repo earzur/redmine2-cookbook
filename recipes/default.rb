@@ -167,6 +167,7 @@ include_recipe 'nginx'
 
 template "#{node[:nginx][:dir]}/sites-available/redmine" do
   source 'nginx-redmine.erb'
+  cookbook node[:redmine][:nginx_template_cookbook]
   mode 0777
   owner node[:nginx][:user]
   group node[:nginx][:user]
