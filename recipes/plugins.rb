@@ -85,6 +85,11 @@ if ! plugins.nil? && ! plugins.empty?
         not_if { ::File.exists?("#{node[:redmine][:home]}/redmine-#{node[:redmine][:version]}/plugins/#{plugin[:name]}") }
       end
     end
+    if plugin[:install_bundle]
+      execute bundle_install_command do
+        user node[:redmine][:user]
+        cwd "#{node[:redmine][:home]}/redmine-#{node[:redmine][:version]}/plugins/#{plugin[:name]}"
+      end
+    end
   end
 end
-
